@@ -28,8 +28,8 @@ Este proyecto es un sistema de gestión de biblioteca desarrollado en Python. Pe
 3. Clona el repositorio desde GitHub:
 
     ```bash
-    git clone https://github.com/evansio/Biblioteca_python.git
-    cd Biblioteca_python
+    git clone https://github.com/CrisDenisse/biblioteca_python.git
+    cd biblioteca_python
     ```
 
 ### Paso 2: Crear archivo README.md
