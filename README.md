@@ -108,7 +108,6 @@ Edita la información de un usuario y verifica que el cambio se refleje correcta
 
 Añade comentarios al código para documentar las funciones y clases, tal como se muestra a continuación:
 
-```python
 import pickle
 
 class Libro:
@@ -184,7 +183,7 @@ def prestar_libro(biblioteca, titulo_libro, nombre_usuario):
                     if usuario.nombre == nombre_usuario:
                         usuario.libros_prestados.append(libro)
                         libro.cantidad -= 1
-                        libro.disponible = libro.cantidad > 0
+                        libro.disponible = False
                         print("Libro prestado exitosamente.")
                         return
                 else:
@@ -259,7 +258,7 @@ def listar_libros_usuario(biblioteca, nombre_usuario):
             if usuario.libros_prestados:
                 print(f"Libros prestados a {nombre_usuario}:")
                 for libro in usuario.libros_prestados:
-                    print(f"Título: {libro.titulo}, Autor: {libro.autor}")
+                    print(libro.titulo)
             else:
                 print(f"{nombre_usuario} no tiene libros prestados.")
             return
@@ -280,36 +279,18 @@ def devolver_libro(biblioteca, titulo_libro, nombre_usuario):
             for libro in usuario.libros_prestados:
                 if libro.titulo == titulo_libro:
                     usuario.libros_prestados.remove(libro)
-                    for libro_biblioteca in biblioteca['libros']:
-                        if libro_biblioteca.titulo == titulo_libro:
-                            libro_biblioteca.cantidad += 1
-                            libro_biblioteca.disponible = True
+                    for biblioteca_libro in biblioteca['libros']:
+                        if biblioteca_libro.titulo == titulo_libro:
+                            biblioteca_libro.cantidad += 1
+                            biblioteca_libro.disponible = True
                             print("Libro devuelto exitosamente.")
                             return
                     else:
-                        print("Libro no encontrado en la biblioteca.")
+                        print("Error: libro no encontrado en la biblioteca.")
                         return
             else:
-                print("Libro no prestado a este usuario.")
+                print("Error: el usuario no tiene este libro prestado.")
                 return
-    else:
-        print("Usuario no encontrado.")
-
-def editar_usuario(biblioteca, nombre_usuario):
-    """
-    Permite editar el nombre de un usuario registrado.
-
-    Parámetros:
-    - biblioteca: Diccionario que contiene la información de la biblioteca.
-    - nombre_usuario: El nombre del usuario a editar.
-    """
-    for usuario in biblioteca['usuarios']:
-        if usuario.nombre == nombre_usuario:
-            print(f"Editando información de {nombre_usuario}:")
-            nuevo_nombre = input("Ingrese el nuevo nombre del usuario: ")
-            usuario.nombre = nuevo_nombre
-            print("Información del usuario actualizada exitosamente.")
-            return
     else:
         print("Usuario no encontrado.")
 
@@ -325,8 +306,7 @@ def mostrar_menu():
     print("5. Listar Usuarios")
     print("6. Listar Libros de Usuario")
     print("7. Devolver Libro")
-    print("8. Editar Usuario")
-    print("9. Salir")
+    print("8. Salir")
 
 def main():
     """
@@ -361,7 +341,14 @@ def main():
             nombre_usuario = input("Ingrese el nombre del usuario: ")
             devolver_libro(biblioteca, titulo_libro, nombre_usuario)
         elif opcion == "8":
-            nombre_usuario = input("Ingrese el nombre del usuario a editar
+            guardar_datos(biblioteca)
+            print("¡Gracias por usar el sistema de gestión de biblioteca!")
+            break
+        else:
+            print("Opción no válida. Por favor, seleccione una opción válida.")
+
+if __name__ == "__main__":
+    main()
 
 ```
 ## Mejoras y Adiciones Futuras
