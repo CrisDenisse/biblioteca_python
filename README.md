@@ -108,6 +108,7 @@ Edita la información de un usuario y verifica que el cambio se refleje correcta
 
 Añade comentarios al código para documentar las funciones y clases, tal como se muestra a continuación:
 
+```bash
 import pickle
 
 class Libro:
@@ -349,7 +350,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 ```
 ## Mejoras y Adiciones Futuras
 
